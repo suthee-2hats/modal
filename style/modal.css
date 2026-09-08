@@ -58,3 +58,122 @@
 
     cursor: pointer;
 }
+
+.modal-alert-image {
+    width: 60px;
+    height: 60px;
+
+    object-fit: contain;
+
+    display: block;
+
+    margin: 0 auto 20px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.modal-not-confirm,
+.modal-confirm {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.modal-not-confirm {
+    background-color: #e5e5e5;
+    color: #333;
+}
+
+.modal-not-confirm:hover {
+    background-color: #d5d5d5;
+}
+
+.modal-confirm {
+    background-color: #007bff;
+    color: white;
+}
+
+.modal-confirm:hover {
+    background-color: #0056b3;
+}
+
+/* Form */
+
+.modal-content form {
+    margin-top: 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+
+    margin-bottom: 7px;
+}
+
+.form-group input {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: #222;
+}
+
+
+/* Error message */
+
+.form-group .error {
+    min-height: 18px;
+
+    margin-top: 5px;
+
+    font-size: 13px;
+
+    color: red;
+}
+
+
+/* Submit button */
+
+.modal-content form button[type="submit"] {
+    width: 100%;
+
+    padding: 12px;
+
+    border: none;
+    border-radius: 5px;
+
+    background: #222;
+    color: white;
+
+    font-size: 15px;
+
+    cursor: pointer;
+}
+
+.modal-content form button[type="submit"]:hover {
+    opacity: 0.9;
+}
