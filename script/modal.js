@@ -291,6 +291,6 @@ const obj = new modal("image","Register","Fill the details",true,true,true,".mod
 });
 
 
-obj.Init();
+ obj.Init();
 
 
