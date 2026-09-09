@@ -1,4 +1,4 @@
-
+import {formvalidation} from "./formvalidation.js";
 
 class modal
 {
@@ -56,11 +56,10 @@ class modal
        if(this.type == 'form'){
             this.createForm();
         }
-               /* 
         if(this.type == 'image'){
             this.createImage();
         }
-            */
+        
 
 
     }
@@ -141,31 +140,68 @@ class modal
                     <input
                         type="${field.type}"
                         id="${field.id}"
+                        name="${field.name}"
                         placeholder="${field.placeholder || ""}"
+                        autocomplete="${field.autocomplete || ""}"
                         ${field.required ? "required" : ""}
                     >
     
-                    <span class="error"></span>
+                    <p class="form-error"></p>
     
                 </div>
             `;
         });
     
+    
         innercontainer.innerHTML = `
+    
             <h2>${this.title}</h2>
     
             <p>${this.content}</p>
     
-            <form id="modal-form">
+            <form id="${formOptions.id}" novalidate>
+    
                 ${fieldsHTML}
     
-                <button type="submit">
+                <button type="submit" class="submit-button">
                     Submit
                 </button>
+    
             </form>
         `;
+    
+    
+        this.initializeValidation(
+            `#${formOptions.id}`,
+            formOptions.rules
+        );
     }
 
+    initializeValidation(formSelector, rules) {
+
+
+
+        const validation = new formvalidation(
+            formSelector,
+            rules
+        );
+    
+        validation.init();
+    }
+// till this is form validation and form 
+createImage() {
+    const innercontainer = document.querySelector(".modal-content");
+
+    const imageSrc = this.options.image?.src;
+
+    innercontainer.innerHTML = `
+        <img 
+            class="modal-image"
+            src="${imageSrc}" 
+            alt="${this.options.image?.alt ?? "Modal image"}"
+        >
+    `;
+}
     
     closePopup(){
         if(this.closeOnEscape){
@@ -202,7 +238,7 @@ class modal
 
 }
 
-const obj = new modal("form","Register","Fill the details",true,true,true,".modal-overlay",{
+const obj = new modal("image","Register","Fill the details",true,true,true,".modal-overlay",{
             confirm:{
                 not_confirm : "cancel",
                 confirm : "delete"
@@ -211,35 +247,45 @@ const obj = new modal("form","Register","Fill the details",true,true,true,".moda
             alert:{
                 button : "okay"
             },
+            image:{
+                src : "../img/alert.png"
+            },
             form: {
+                id: "registration-form",
+        
                 fields: [
                     {
                         label: "Username",
                         type: "text",
                         id: "username",
-                        placeholder: "Enter username",
+                        name: "username",
+                        placeholder: "Enter your username",
+                        autocomplete: "username",
                         required: true
                     },
                     {
                         label: "Email",
                         type: "email",
                         id: "email",
-                        placeholder: "Enter email",
+                        name: "email",
+                        placeholder: "you@example.com",
+                        autocomplete: "email",
                         required: true
                     },
                     {
-                        label: "Password",
-                        type: "password",
-                        id: "password",
-                        placeholder: "Enter password",
-                        required: true
+                        label: "Age",
+                        type: "number",
+                        id: "age",
+                        name: "age",
+                        placeholder: "Enter your age"
                     }
                 ],
         
                 rules: {
-                    username: {},
-                    email: {},
-                    password: {}
+                    age: {
+                        max: 60,
+                        min: 18
+                    }
                 }
             }
 });
